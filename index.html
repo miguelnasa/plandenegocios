@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Plan de Negocios Joyería – P&G Dinámico</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root {
+      --bg: #0b0b10;
+      --card: #181820;
+      --accent: #f6b600;
+      --accent-soft: rgba(246,182,0,0.14);
+      --text-main: #f9f9fb;
+      --text-muted: #a0a0b8;
+      --border: #262638;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #252538 0, #050509 55%, #020204 100%);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      padding: 18px 24px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      backdrop-filter: blur(12px);
+      background: linear-gradient(to right, rgba(10,10,16,0.96), rgba(10,10,16,0.82));
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 1.5rem;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+    }
+
+    header p {
+      margin: 4px 0 0;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    #printBtn {
+      margin-top: 8px;
+      padding: 6px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(246,182,0,0.7);
+      background: rgba(246,182,0,0.12);
+      color: #f6b600;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      cursor: pointer;
+    }
+
+    #printBtn:hover {
+      background: rgba(246,182,0,0.22);
+    }
+
+    main {
+      flex: 1;
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.2fr);
+      gap: 18px;
+      padding: 18px;
+    }
+
+    @media (max-width: 900px) {
+      main {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .panel {
+      background: linear-gradient(145deg, rgba(24,24,32,0.98), rgba(15,15,24,0.98));
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      box-shadow: 0 20px 45px rgba(0,0,0,0.55);
+      padding: 16px 18px 20px;
+      overflow: auto;
+      max-height: calc(100vh - 120px);
+    }
+
+    .panel h2 {
+      font-size: 1.05rem;
+      margin: 0 0 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--accent);
+    }
+
+    .panel small {
+      color: var(--text-muted);
+      font-size: 0.78rem;
+    }
+
+    .section {
+      margin-top: 16px;
+      padding-top: 10px;
+      border-top: 1px dashed rgba(255,255,255,0.12);
+    }
+
+    .section-title {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 6px;
+    }
+
+    .section-title h3 {
+      font-size: 0.92rem;
+      margin: 0;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: #f5f5ff;
+    }
+
+    .section-title span {
+      font-size: 0.76rem;
+      color: var(--text-muted);
+    }
+
+    label {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--text-muted);
+      display: block;
+      margin-top: 8px;
+      margin-bottom: 2px;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    input[type="date"],
+    textarea {
+      width: 100%;
+      padding: 7px 9px;
+      border-radius: 8px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(9,9,16,0.9);
+      color: var(--text-main);
+      font-size: 0.85rem;
+      outline: none;
+      transition: border-color 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+    }
+
+    input::placeholder,
+    textarea::placeholder {
+      color: rgba(160,160,184,0.7);
+    }
+
+    input:focus,
+    textarea:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 1px rgba(246,182,0,0.35);
+      background: rgba(10,10,18,1);
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 60px;
+      max-height: 180px;
+    }
+
+    .two-cols {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0,1fr));
+      gap: 8px;
+    }
+
+    @media (max-width: 700px) {
+      .two-cols {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .hint {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 2px 8px;
+      border-radius: 999px;
+      font-size: 0.72rem;
+      background: var(--accent-soft);
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+    }
+
+    .preview-header {
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      padding-bottom: 8px;
+      margin-bottom: 8px;
+    }
+
+    .preview-name {
+      font-size: 1.15rem;
+      text-transform: uppercase;
+      letter-spacing: 0.3em;
+    }
+
+    .preview-tagline {
+      font-size: 0.8rem;
+      color: var(--accent);
+      margin-top: 2px;
+    }
+
+    .preview-section {
+      margin-top: 12px;
+      padding: 8px 10px;
+      border-radius: 10px;
+      background: radial-gradient(circle at top left, rgba(246,182,0,0.07), rgba(10,10,18,0.96));
+      border: 1px solid rgba(255,255,255,0.05);
+      font-size: 0.82rem;
+    }
+
+    .preview-section-title {
+      font-size: 0.76rem;
+      text-transform: uppercase;
+      letter-spacing: 0.17em;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+
+    .preview-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0,1fr));
+      gap: 6px 20px;
+      margin-top: 6px;
+    }
+
+    .preview-label {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.09em;
+    }
+
+    .preview-value {
+      font-size: 0.86rem;
+      margin-top: 1px;
+    }
+
+    .muted {
+      color: rgba(160,160,184,0.7);
+      font-style: italic;
+    }
+
+    .pill {
+      display: inline-block;
+      padding: 2px 7px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.12);
+      font-size: 0.78rem;
+      margin-right: 4px;
+      margin-bottom: 4px;
+    }
+
+    .footer {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      padding: 6px 18px 10px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      text-align: right;
+    }
+
+    @media print {
+      body {
+        background: #ffffff;
+      }
+      header,
+      #formPanel,
+      .footer {
+        display: none !important;
+      }
+      #previewPanel {
+        box-shadow: none;
+        border: none;
+        max-height: none;
+      }
+      main {
+        padding: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Plan de Negocios – Joyería</h1>
+    <p>Página dinámica para construir tu P & G: escribe a la izquierda, se resume a la derecha.</p>
+    <button id="printBtn">Imprimir vista previa</button>
+  </header>
+
+  <main>
+    <!-- PANEL IZQUIERDO: FORMULARIO -->
+    <section class="panel" id="formPanel">
+      <h2>Editar plan</h2>
+      <small>Completa los campos clave de tu plan de negocios y guion de ventas.</small>
+
+      <!-- 1. Información básica -->
+      <div class="section">
+        <div class="section-title">
+          <h3>1. Información básica</h3>
+          <span class="badge">Joyería</span>
+        </div>
+
+        <label for="nombre">Nombre de la joyería</label>
+        <input id="nombre" type="text" placeholder="Ej: Joyería Luz de Oro" />
+
+        <label for="eslogan">Eslogan</label>
+        <input id="eslogan" type="text" placeholder="Ej: Joyas que cuentan tu historia" />
+
+        <div class="two-cols">
+          <div>
+            <label for="tipo">Tipo de joyería</label>
+            <input id="tipo" type="text" placeholder="Física / Online / Híbrida" />
+          </div>
+          <div>
+            <label for="ubicacion">Ubicación / Canal principal</label>
+            <input id="ubicacion" type="text" placeholder="Ciudad, barrio, marketplace, etc." />
+          </div>
+        </div>
+
+        <label for="descripcion">Descripción breve del negocio</label>
+        <textarea id="descripcion" placeholder="¿Qué vendes, a quién, y qué tiene de especial tu joyería?"></textarea>
+        <div class="hint">Piensa en 3–4 líneas claras: tipo de joyas, estilo, público y enfoque.</div>
+      </div>
+
+      <!-- 2. Propuesta de valor y mercado -->
+      <div class="section">
+        <div class="section-title">
+          <h3>2. Propuesta de valor y mercado</h3>
+          <span>Core del plan</span>
+        </div>
+
+        <label for="problema">Necesidad / problema del cliente</label>
+        <textarea id="problema" placeholder="¿Qué problema resuelven tus joyas? (regalo especial, compromiso, joyas sostenibles, etc.)"></textarea>
+
+        <label for="solucion">Propuesta de valor</label>
+        <textarea id="solucion" placeholder="¿Qué ofreces exactamente y por qué es valioso/diferente?"></textarea>
+
+        <label for="segmento">Cliente objetivo</label>
+        <textarea id="segmento" placeholder="Edad, estilo de vida, gustos, poder adquisitivo, ciudad o canal digital."></textarea>
+
+        <label for="diferencial">Diferenciales frente a otras joyerías</label>
+        <textarea id="diferencial" placeholder="Ej: diseño personalizado, materiales certificados, servicio cercano, producción sostenible."></textarea>
+      </div>
+
+      <!-- 3. Productos, canales y precios -->
+      <div class="section">
+        <div class="section-title">
+          <h3>3. Productos, canales y precios</h3>
+          <span>Qué vendes y cómo</span>
+        </div>
+
+        <label for="productos">Líneas de producto</label>
+        <textarea id="productos" placeholder="Ej: anillos de compromiso, collares minimalistas, pulseras personalizadas, sets para regalo, etc."></textarea>
+
+        <label for="canales">Canales de venta</label>
+        <textarea id="canales" placeholder="Ej: tienda física, Instagram, WhatsApp Business, página web, marketplaces, ferias."></textarea>
+
+        <label for="precios">Estrategia de precios</label>
+        <textarea id="precios" placeholder="¿Cómo defines tus precios? (coste + margen, precios premium, rangos, etc.)"></textarea>
+      </div>
+
+      <!-- 4. Finanzas muy resumidas -->
+      <div class="section">
+        <div class="section-title">
+          <h3>4. Finanzas resumidas</h3>
+          <span>Números clave</span>
+        </div>
+
+        <div class="two-cols">
+          <div>
+            <label for="inversion">Inversión inicial estimada</label>
+            <input id="inversion" type="text" placeholder="Ej: 15.000.000 COP" />
+          </div>
+          <div>
+            <label for="costosFijos">Costos fijos mensuales</label>
+            <input id="costosFijos" type="text" placeholder="Ej: 3.000.000 COP" />
+          </div>
+        </div>
+
+        <label for="ingresos">Ingresos mensuales esperados</label>
+        <input id="ingresos" type="text" placeholder="Ej: 5.000.000 COP" />
+
+        <label for="comentarioFinanzas">Notas financieras</label>
+        <textarea id="comentarioFinanzas" placeholder="Punto de equilibrio aproximado, meses para recuperar inversión, etc."></textarea>
+      </div>
+
+      <!-- 5. Guion de ventas (P & G) -->
+      <div class="section">
+        <div class="section-title">
+          <h3>5. Guion de ventas (P & G)</h3>
+          <span>Experiencia del cliente</span>
+        </div>
+
+        <label for="apertura">Apertura / saludo</label>
+        <textarea id="apertura" placeholder="Ej: “Bienvenido/a a [Nombre], ¿qué momento especial quieres celebrar hoy?”"></textarea>
+
+        <label for="preguntas">Preguntas para detectar necesidades</label>
+        <textarea id="preguntas" placeholder="Ej: ¿Es para ti o para regalo? ¿Para qué ocasión? ¿Prefieres oro o plata?"></textarea>
+
+        <label for="argumentos">Argumentos de venta</label>
+        <textarea id="argumentos" placeholder="Beneficios clave: calidad del material, diseño, garantía, personalización, historia de la pieza, etc."></textarea>
+
+        <label for="cierres">Frases de cierre</label>
+        <textarea id="cierres" placeholder="Ej: “De estas opciones, ¿cuál sientes que representa mejor este momento?”"></textarea>
+
+        <label for="postventa">Acciones de postventa</label>
+        <textarea id="postventa" placeholder="Mensajes de seguimiento, invitación a redes, limpieza gratuita, programa de referidos, etc."></textarea>
+      </div>
+    </section>
+
+    <!-- PANEL DERECHO: PREVIEW -->
+    <section class="panel" id="previewPanel">
+      <h2>Vista previa</h2>
+      <small>Resumen legible de tu plan y guion, listo para copiar, imprimir o exportar.</small>
+
+      <div class="preview-header">
+        <div class="preview-name" id="pv_nombre">[NOMBRE DE LA JOYERÍA]</div>
+        <div class="preview-tagline" id="pv_eslogan">Agrega un eslogan para darle personalidad a tu marca.</div>
+        <div class="hint" id="pv_tipoUbicacion">Tipo de joyería y ubicación aparecerán aquí.</div>
+      </div>
+
+      <div class="preview-section">
+        <div class="preview-section-title">1. Descripción del negocio</div>
+        <div class="preview-grid">
+          <div>
+            <div class="preview-label">Tipo y ubicación</div>
+            <div class="preview-value" id="pv_tipoUbicacionDetalle">
+              Completa el tipo de joyería y el canal principal.
+            </div>
+          </div>
+          <div>
+            <div class="preview-label">Descripción breve</div>
+            <div class="preview-value" id="pv_descripcion">
+              Resume en pocas líneas qué hace tu joyería y qué la hace especial.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="preview-section">
+        <div class="preview-section-title">2. Propuesta de valor y mercado</div>
+        <div class="preview-label">Necesidad del cliente</div>
+        <div class="preview-value" id="pv_problema">
+          Describe qué necesita tu cliente ideal y qué problema resuelves.
+        </div>
+
+        <div class="preview-label" style="margin-top:6px;">Propuesta de valor</div>
+        <div class="preview-value" id="pv_solucion">
+          Explica tu solución en 2–3 frases claras.
+        </div>
+
+        <div class="preview-label" style="margin-top:6px;">Cliente objetivo</div>
+        <div class="preview-value" id="pv_segmento">
+          Define brevemente quién es tu público principal.
+        </div>
+
+        <div class="preview-label" style="margin-top:6px;">Diferenciales</div>
+        <div class="preview-value" id="pv_diferencial">
+          Enumera 2–4 cosas que te hacen distinto a otras joyerías.
+        </div>
+      </div>
+
+      <div class="preview-section">
+        <div class="preview-section-title">3. Oferta, canales y precios</div>
+        <div class="preview-label">Líneas de producto</div>
+        <div class="preview-value" id="pv_productos">
+          Describe tus colecciones o tipos de joyas principales.
+        </div>
+
+        <div class="preview-label" style="margin-top:6px;">Canales de venta</div>
+        <div class="preview-value" id="pv_canales">
+          Explica por dónde venderás tus joyas (tienda, redes, web, ferias).
+        </div>
+
+        <div class="preview-label" style="margin-top:6px;">Estrategia de precios</div>
+        <div class="preview-value" id="pv_precios">
+          Señala cómo calculas tus precios y en qué rango te quieres mover.
+        </div>
+      </div>
+
+      <div class="preview-section">
+        <div class="preview-section-title">4. Finanzas clave</div>
+        <div class="preview-grid">
+          <div>
+            <div class="preview-label">Inversión inicial</div>
+            <div class="preview-value pill" id="pv_inversion">Por definir</div>
+          </div>
+          <div>
+            <div class="preview-label">Costos fijos</div>
+            <div class="preview-value pill" id="pv_costosFijos">Por definir</div>
+          </div>
+        </div>
+        <div class="preview-label" style="margin-top:6px;">Ingresos esperados</div>
+        <div class="preview-value pill" id="pv_ingresos">Por definir</div>
+        <div class="preview-label" style="margin-top:6px;">Notas</div>
+        <div class="preview-value" id="pv_comentarioFinanzas">
+          Usa este espacio para explicar tu punto de equilibrio o metas financieras.
+        </div>
+      </div>
+
+      <div class="preview-section">
+        <div class="preview-section-title">5. Guion de ventas (P & G)</div>
+        <div class="preview-label">Apertura</div>
+        <div class="preview-value" id="pv_apertura">
+          Redacta tu frase de bienvenida en tienda o chat.
+        </div>
+
+        <div class="preview-label" style="margin-top:6px;">Preguntas clave</div>
+        <div class="preview-value" id="pv_preguntas">
+          Lista 3–5 preguntas para entender qué busca el cliente.
+        </div>
+
+        <div class="preview-label" style="margin-top:6px;">Argumentos de valor</div>
+        <div class="preview-value" id="pv_argumentos">
+          Resume los puntos fuertes que usarás para convencer (calidad, historia, garantía).
+        </div>
+
+        <div class="preview-label" style="margin-top:6px;">Cierre</div>
+        <div class="preview-value" id="pv_cierres">
+          Escribe 1–2 frases para ayudar a tomar la decisión final.
+        </div>
+
+        <div class="preview-label" style="margin-top:6px;">Postventa</div>
+        <div class="preview-value" id="pv_postventa">
+          Define cómo harás seguimiento después de la compra.
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div class="footer">
+    Esta plantilla es solo local: escribe, imprime o guarda como PDF desde tu navegador.
+  </div>
+
+  <script>
+    const bindings = [
+      ["nombre", "pv_nombre", "[NOMBRE DE LA JOYERÍA]"],
+      ["eslogan", "pv_eslogan", "Agrega un eslogan para darle personalidad a tu marca."],
+      ["tipo", "pv_tipoUbicacion", "Tipo de joyería y ubicación aparecerán aquí."],
+      ["ubicacion", "pv_tipoUbicacion", "Tipo de joyería y ubicación aparecerán aquí."],
+      ["tipo", "pv_tipoUbicacionDetalle", "Completa el tipo de joyería y el canal principal."],
+      ["ubicacion", "pv_tipoUbicacionDetalle", "Completa el tipo de joyería y el canal principal."],
+      ["descripcion", "pv_descripcion", "Resume en pocas líneas qué hace tu joyería y qué la hace especial."],
+      ["problema", "pv_problema", "Describe qué necesita tu cliente ideal y qué problema resuelves."],
+      ["solucion", "pv_solucion", "Explica tu solución en 2–3 frases claras."],
+      ["segmento", "pv_segmento", "Define brevemente quién es tu público principal."],
+      ["diferencial", "pv_diferencial", "Enumera 2–4 cosas que te hacen distinto a otras joyerías."],
+      ["productos", "pv_productos", "Describe tus colecciones o tipos de joyas principales."],
+      ["canales", "pv_canales", "Explica por dónde venderás tus joyas (tienda, redes, web, ferias)."],
+      ["precios", "pv_precios", "Señala cómo calculas tus precios y en qué rango te quieres mover."],
+      ["inversion", "pv_inversion", "Por definir"],
+      ["costosFijos", "pv_costosFijos", "Por definir"],
+      ["ingresos", "pv_ingresos", "Por definir"],
+      ["comentarioFinanzas", "pv_comentarioFinanzas", "Usa este espacio para explicar tu punto de equilibrio o metas financieras."],
+      ["apertura", "pv_apertura", "Redacta tu frase de bienvenida en tienda o chat."],
+      ["preguntas", "pv_preguntas", "Lista 3–5 preguntas para entender qué busca el cliente."],
+      ["argumentos", "pv_argumentos", "Resume los puntos fuertes que usarás para convencer (calidad, historia, garantía)."],
+      ["cierres", "pv_cierres", "Escribe 1–2 frases para ayudar a tomar la decisión final."],
+      ["postventa", "pv_postventa", "Define cómo harás seguimiento después de la compra."]
+    ];
+
+    const map = {};
+
+    bindings.forEach(([inputId, pvId, placeholder]) => {
+      if (!map[inputId]) map[inputId] = [];
+      map[inputId].push({ pvId, placeholder });
+    });
+
+    Object.keys(map).forEach(inputId => {
+      const input = document.getElementById(inputId);
+      if (!input) return;
+      const update = () => {
+        const value = input.value.trim();
+        map[inputId].forEach(({ pvId, placeholder }) => {
+          const el = document.getElementById(pvId);
+          if (!el) return;
+          el.textContent = value || placeholder;
+        });
+      };
+      input.addEventListener("input", update);
+      update();
+    });
+
+    const nombreInput = document.getElementById("nombre");
+    const aperturaInput = document.getElementById("apertura");
+    if (nombreInput && aperturaInput) {
+      nombreInput.addEventListener("input", () => {
+        if (!aperturaInput.value.trim()) {
+          const n = nombreInput.value.trim() || "[Nombre de la joyería]";
+          aperturaInput.placeholder = `Ej: “Bienvenido/a a ${n}, ¿qué momento especial quieres celebrar hoy?”`;
+        }
+      });
+    }
+
+    const printBtn = document.getElementById("printBtn");
+    if (printBtn) {
+      printBtn.addEventListener("click", () => {
+        window.print();
+      });
+    }
+  </script>
+</body>
+</html>
